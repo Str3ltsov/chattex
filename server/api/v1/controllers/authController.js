@@ -1,6 +1,10 @@
-import jwt from 'jsonwebtoken'
 import User from "../models/userModel.js"
-import { generateAuthToken, generateResetPasswordToken, sendEmail } from "../services/authServices.js"
+import {
+    generateAuthToken,
+    generateResetPasswordToken,
+    sendEmail,
+    verifyResetPasswordTokenAndGetUserId
+} from "../services/authServices.js"
 
 export const login = async (request, response) => {
     const { email, password, rememberMe } = request.body
@@ -85,9 +89,27 @@ export const forgotPassword = async (request, response) => {
 }
 
 export const resetPassword = async (request, response) => {
+    const token = request.params.token
+    const { password, confirmPassword } = request.body
+
+    if (password !== confirmPassword) {
+        response.status(400).json({
+            'status': 'Error',
+            'message': 'Passwords do not match.'
+        })
+        return
+    }
+
+    const userId = verifyResetPasswordTokenAndGetUserId(token)
+
+    const existingUser = await User.findOne({ _id: userId })
+
+    existingUser.password = password
+    existingUser.save()
+
     response.status(200).json({
         'status': 'OK',
-        'message': 'Success.'
+        'message': 'Successfully reset your password.'
     })
 }
 

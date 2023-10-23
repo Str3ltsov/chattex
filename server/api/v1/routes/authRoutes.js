@@ -6,7 +6,7 @@ const router = express.Router()
 router.post('/login', login)
 router.post('/register', register)
 router.post('/forgotpassword', forgotPassword)
-router.patch('resetpassword/{:token}', resetPassword)
+router.patch('/resetpassword/:token', resetPassword)
 router.post('/logout', logout)
 
 export default router
