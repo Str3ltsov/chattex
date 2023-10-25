@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import express from 'express'
 import cors from 'cors'
 import userRoutes from './api/v1/routes/authRoutes.js'
+import ErrorHandler from './api/v1/middlewares/errorHandler.js'
 
 // Dotenv enviroment.
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
@@ -18,13 +19,18 @@ mongoose.connect(process.env.MONGO_DB_URI)
         process.exit(1);
     })
 
-// Express server.
+// Express server setup.
 const app = express()
 
+// Configs
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
 
+// Middlewares
+app.use(cors())
+app.use(ErrorHandler)
+
+// Routes
 app.use('/api/v1/auth', userRoutes)
 
 app.listen(process.env.APP_PORT, () =>
