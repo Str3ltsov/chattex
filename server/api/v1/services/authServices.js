@@ -46,7 +46,7 @@ export const sendEmail = (toEmail, subject, message) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            throw new Error(error.stack)
+            throw new Error(error.message)
         } else {
             console.info(`Mail has been sent: ${info.response}`)
         }
@@ -58,7 +58,7 @@ export const verifyResetPasswordTokenAndGetUserId = token => {
 
     jwt.verify(token, process.env.JWT_SECRET, (error, payload) => {
         if (error) {
-            throw new Error(error.stack)
+            throw new Error(error.message)
         } else {
             userId = payload.id
         }

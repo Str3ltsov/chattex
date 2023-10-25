@@ -1,3 +1,4 @@
+import asyncHandler from "../middlewares/asyncHandler.js"
 import User from "../models/userModel.js"
 import {
     generateAuthToken,
@@ -6,7 +7,7 @@ import {
     verifyResetPasswordTokenAndGetUserId
 } from "../services/authServices.js"
 
-export const login = async (request, response) => {
+export const login = asyncHandler(async (request, response) => {
     const { email, password, rememberMe } = request.body
 
     const existingUser = await User.findOne({ email })
@@ -19,33 +20,24 @@ export const login = async (request, response) => {
             'message': `Successfully logged in as ${existingUser.username}`
         })
     } else {
-        response.status(400).json({
-            'status': 'Error',
-            'message': 'Invalid credentials.'
-        })
-        return
+        response.status(400)
+        throw new Error('Invalid credentials.')
     }
-}
+})
 
-export const register = async (request, response) => {
+export const register = asyncHandler(async (request, response) => {
     const { username, email, password, confirmPassword } = request.body
 
     if (password !== confirmPassword) {
-        response.status(400).json({
-            'status': 'Error',
-            'message': 'Passwords do not match.'
-        })
-        return
+        response.status(400)
+        throw new Error('Passwords do not match.')
     }
 
     const existingUser = await User.findOne({ username })
 
     if (existingUser) {
-        response.status(400).json({
-            'status': 'Error',
-            'message': 'This username is already taken.'
-        })
-        return
+        response.status(400)
+        throw new Error('This username is already taken.')
     }
 
     await User.create({
@@ -58,19 +50,16 @@ export const register = async (request, response) => {
         'status': 'OK',
         'message': 'Successfully registered your account.'
     })
-}
+})
 
-export const forgotPassword = async (request, response) => {
+export const forgotPassword = asyncHandler(async (request, response) => {
     const { email } = request.body
 
     const existingUser = await User.findOne({ email })
 
     if (!existingUser) {
-        response.status(400).json({
-            'status': 'Error',
-            'message': 'An account with this email does not exist.'
-        })
-        return
+        response.status(400)
+        throw new Error('An account with this email does not exist.')
     }
 
     const expiresInMinutes = 10
@@ -86,18 +75,15 @@ export const forgotPassword = async (request, response) => {
         'status': 'OK',
         'message': 'Successfully sent reset password email.'
     })
-}
+})
 
-export const resetPassword = async (request, response) => {
+export const resetPassword = asyncHandler(async (request, response) => {
     const token = request.params.token
     const { password, confirmPassword } = request.body
 
     if (password !== confirmPassword) {
-        response.status(400).json({
-            'status': 'Error',
-            'message': 'Passwords do not match.'
-        })
-        return
+        response.status(400)
+        throw new Error('Passwords do not match.')
     }
 
     const userId = verifyResetPasswordTokenAndGetUserId(token)
@@ -111,9 +97,9 @@ export const resetPassword = async (request, response) => {
         'status': 'OK',
         'message': 'Successfully reset your password.'
     })
-}
+})
 
-export const logout = async (request, response) => {
+export const logout = asyncHandler(async (request, response) => {
     response.cookie('jwt', '', {
         httpOnly: true,
         expires: new Date(0)
@@ -123,4 +109,4 @@ export const logout = async (request, response) => {
         'status': 'OK',
         'message': 'Successfully logged out.'
     })
-}
+})
