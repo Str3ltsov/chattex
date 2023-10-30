@@ -1,13 +1,14 @@
 {
-  "name": "server",
+  "name": "Chattex Server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Contains the server-side part of the project.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "start": "node index.js",
+    "server": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Andrej Strelcov",
   "license": "ISC",
   "type": "module",
   "dependencies": {
@@ -16,7 +17,8 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.6.3"
+    "mongoose": "^7.6.3",
+    "nodemailer": "^6.9.7"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
