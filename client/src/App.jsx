@@ -1,6 +1,6 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import AuthLayout from './screens/layouts/AuthLayout.jsx'
-import LoginScreen from './screens/login/LoginScreen.jsx'
+import LoginScreen from './screens/Login/LoginScreen.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

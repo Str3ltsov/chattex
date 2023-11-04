@@ -8,6 +8,16 @@ export const AuthMain = styled.main`
     width: 100%;
     min-height: 100vh;
     background-color: ${pallete.authMainBackgroundColor};
+    animation: 500ms alternate fadeIn;
+
+    @keyframes fadeIn {
+        from {
+            opacity: .2;
+        }
+        to {
+            opacity: 1;
+        }
+    }
 `
 
 export const AuthContainer = styled.div`
@@ -19,11 +29,11 @@ export const AuthContainer = styled.div`
     height: 820px;
     width: ${pallete.phoneSize};
     transition: all 200ms ease;
-    padding: 60px calc(60px * 2);
+    padding: 70px 50px;
 
     @media (width <= calc(${pallete.phoneSize} + 100px)) {
+        min-height: 100vh;
         width: 100%;
-        height: 100vh;
     }
 `
 
