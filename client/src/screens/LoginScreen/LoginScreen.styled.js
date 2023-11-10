@@ -101,6 +101,7 @@ export const FormButton = styled.button`
     height: 60px;
     transition: all 250ms ease-in-out;
     cursor: pointer;
+    overflow: hidden;
 
     &:hover, &:focus, &:active {
         background-color: ${pallete.primaryButtonHoverColor};

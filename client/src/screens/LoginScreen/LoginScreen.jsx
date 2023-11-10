@@ -10,6 +10,7 @@ import {
 } from "./LoginScreen.styled.js"
 import InputField from '../../components/InputField/InputField.jsx'
 import PasswordField from '../../components/PasswordField/PasswordField.jsx'
+import ButtonCheckMark from "../../components/ButtonCheckMark/ButtonCheckMark.jsx"
 
 /* Authentication login screen */
 const LoginScreen = () => {
