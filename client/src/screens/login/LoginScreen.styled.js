@@ -86,7 +86,7 @@ export const FormCheckboxAndLinkContainer = styled.div`
     }
 `
 
-export const FormButton = styled.div`
+export const FormButton = styled.button`
     border: none;
     background-color: ${pallete.primaryButtonColor};
     color: ${pallete.whiteColor};
@@ -104,6 +104,15 @@ export const FormButton = styled.div`
 
     &:hover, &:focus, &:active {
         background-color: ${pallete.primaryButtonHoverColor};
+    }
+
+    &:disabled {
+        opacity: .8;
+        cursor: not-allowed;
+
+        &:hover, &:focus, &:active {
+            background-color: ${pallete.primaryButtonColor};
+        }
     }
 `
 

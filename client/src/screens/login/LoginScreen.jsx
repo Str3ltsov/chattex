@@ -30,7 +30,7 @@ const LoginScreen = () => {
           </label>
           <a href="/login">Forgot Password?</a>
         </FormCheckboxAndLinkContainer>
-        <FormButton type="submit">
+        <FormButton type="button">
           <FormButtonIcon />
           Login
         </FormButton>

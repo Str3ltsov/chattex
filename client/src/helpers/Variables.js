@@ -5,6 +5,7 @@ export const defaultFontFamily = '"Roboto", sans-serif'
 export const darkGrayColor = '#444444'
 export const grayColor = '#777777'
 export const whiteColor = '#FAFAFA'
+export const blueColor = '#5965D6'
 export const successColor = '#43A047'
 export const errorColor = '#DD3333'
 
