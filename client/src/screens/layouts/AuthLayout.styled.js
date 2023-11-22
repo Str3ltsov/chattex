@@ -26,7 +26,7 @@ export const AuthContainer = styled.div`
     align-items: center;
     flex-direction: column;
     background-color: ${pallete.whiteColor};
-    height: 820px;
+    height: 51.25rem;
     width: ${pallete.phoneSize};
     transition: all 200ms ease;
     padding: 70px 50px;
@@ -40,5 +40,5 @@ export const AuthContainer = styled.div`
 export const AuthLogo = styled.h1`
     color: ${pallete.logoColor};
     font-weight: bold;
-    font-size: 2.3em;
+    font-size: 2.3rem;
 `
