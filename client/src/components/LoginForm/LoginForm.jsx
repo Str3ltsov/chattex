@@ -19,7 +19,7 @@ const LoginForm = () => {
                     <span>&#10003;</span>
                     Remember me for 30 days
                 </label>
-                <a href="#">Forgot Password?</a>
+                <a href="/forgot-password">Forgot Password?</a>
             </FormCheckboxAndLinkContainer>
             <FormButton type="submit">
                 <FormButtonIcon />
