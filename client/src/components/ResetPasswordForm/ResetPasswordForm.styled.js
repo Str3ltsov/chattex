@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MdOutlineEmail } from "react-icons/md";
+import { MdLockReset } from "react-icons/md";
 import * as pallete from '../../helpers/Variables.js'
 
 export const FormContainer = styled.form`
@@ -43,7 +43,7 @@ export const FormButton = styled.button`
     }
 `
 
-export const FormButtonIcon = styled(MdOutlineEmail)`
+export const FormButtonIcon = styled(MdLockReset)`
     filter: invert(100%) sepia(100%) saturate(0%) 
             hue-rotate(161deg) brightness(105%) contrast(104%);
     font-size: 1.5rem;
