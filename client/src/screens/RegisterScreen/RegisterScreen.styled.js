@@ -29,19 +29,6 @@ export const InfoContainer = styled.div`
     }
 `
 
-export const OrContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: inherit;
-    color: ${pallete.darkGrayColor};
-
-    @media (width <= calc(${pallete.phoneSize} + 100px)) {
-        height: 0%;
-        padding: 6vh 0;
-    }
-`
-
 export const BottomContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -49,6 +36,7 @@ export const BottomContainer = styled.div`
     flex-wrap: wrap;
     column-gap: 8px;
     row-gap: 10px;
+    margin-top: 1.3rem;
     
     span {
         color: ${pallete.grayColor};

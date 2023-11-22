@@ -18,7 +18,7 @@ const LoginScreen = () => {
       <OrContainer>- Or -</OrContainer>
       <BottomContainer>
         <span>Don't have an account yet?</span>
-        <a href="#">Create one now!</a>
+        <a href="/register">Create one now!</a>
       </BottomContainer>
     </Container>
   )

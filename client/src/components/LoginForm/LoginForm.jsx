@@ -21,7 +21,7 @@ const LoginForm = () => {
                 </label>
                 <a href="#">Forgot Password?</a>
             </FormCheckboxAndLinkContainer>
-            <FormButton type="button">
+            <FormButton type="submit">
                 <FormButtonIcon />
                 Login
             </FormButton>
