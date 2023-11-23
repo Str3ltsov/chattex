@@ -7,11 +7,13 @@ import ResetPasswordScreen from './screens/ResetPasswordScreen/ResetPasswordScre
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<AuthLayout />}>
-      <Route index path='/login' element={<LoginScreen />} />
-      <Route path='/register' element={<RegisterScreen />} />
-      <Route path='/forgot-password' element={<ForgotPasswordScreen />} />
-      <Route path='/reset-password/:token' element={<ResetPasswordScreen />} />
+    <Route>
+      <Route element={<AuthLayout />}>
+        <Route index={true} path='/login' element={<LoginScreen />} />
+        <Route path='/register' element={<RegisterScreen />} />
+        <Route path='/forgot-password' element={<ForgotPasswordScreen />} />
+        <Route path='/reset-password/:token' element={<ResetPasswordScreen />} />
+      </Route>
     </Route>
   )
 )
