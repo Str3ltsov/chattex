@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
     FormContainer,
     FormCheckboxAndLinkContainer,
@@ -6,24 +7,51 @@ import {
 } from "./LoginForm.styled.js"
 import InputField from '../../components/InputField/InputField.jsx'
 import PasswordField from '../../components/PasswordField/PasswordField.jsx'
+import ButtonLoader from '../../components/ButtonLoader/ButtonLoader.jsx'
+import ButtonCheckMark from '../../components/ButtonCheckMark/ButtonCheckMark.jsx'
+import useLoginMutation from "../../hooks/useLoginMutation.js"
 
 /* Form for login authentication */
 const LoginForm = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [rememberMe, setRememberMe] = useState(false)
+
+    const getEmail = emailValue => setEmail(emailValue)
+    const getPassword = passwordValue => setPassword(passwordValue)
+
+    const handleRememberMe = () => setRememberMe(prev => !prev)
+
+    const { mutate, isLoading, isError, isSuccess } = useLoginMutation()
+
+    const submitForm = event => {
+        event.preventDefault()
+        mutate({ email, password, rememberMe })
+    }
+
     return (
         <FormContainer>
-            <InputField label={"Email*"} type={"email"} name={"email"} id={"email"} placeholder={"johnjohnson@gmail.com"} />
-            <PasswordField />
+            <InputField getValue={getEmail} error={isError.toString()} label={"Email*"} type={"email"}
+                name={"email"} id={"email"} placeholder={"johnjohnson@gmail.com"} />
+            <PasswordField getValue={getPassword} error={isError.toString()} />
             <FormCheckboxAndLinkContainer>
                 <label htmlFor="rememberMe">
-                    <input type="checkbox" name="rememberMe" id="rememberMe" />
+                    <input type="checkbox" name="rememberMe" id="rememberMe" onChange={handleRememberMe} />
                     <span>&#10003;</span>
                     Remember me for 30 days
                 </label>
                 <a href="/forgot-password">Forgot Password?</a>
             </FormCheckboxAndLinkContainer>
-            <FormButton type="submit">
-                <FormButtonIcon />
-                Login
+            <FormButton type="button" onClick={submitForm} disabled={isLoading || isSuccess}>
+                {isLoading && <ButtonLoader />}
+                {isSuccess && <ButtonCheckMark />}
+                {
+                    !isLoading && !isSuccess &&
+                    <>
+                        <FormButtonIcon />
+                        Login
+                    </>
+                }
             </FormButton>
         </FormContainer>
     )

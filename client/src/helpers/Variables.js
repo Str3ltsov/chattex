@@ -22,6 +22,7 @@ export const primaryButtonHoverColor = '#5965d6cc'
 
 // Inputs
 export const inputBorder = '3px solid #DFDFDF'
+export const inputErrorBorder = '3px solid #DD3333'
 export const inputBackgroundColor = '#FDFDFD'
 export const inputColor = '#444444'
 export const inputOutline = '3px solid #BFBFBF'

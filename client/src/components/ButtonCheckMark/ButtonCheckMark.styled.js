@@ -15,7 +15,7 @@ export const CheckMarkIcon = styled(GrFormCheckmark)`
 export const CheckMarkHide = styled.div`
     width: 100%;
     height: 100%;
-    background-color: ${({ color }) => color === 'primary' ? pallete.blueColor : pallete.whiteColor};
+    background-color: ${({ color }) => color !== 'primary' ? pallete.blueColor : pallete.whiteColor};
     position: absolute;
     top: 0;
     left: 0;

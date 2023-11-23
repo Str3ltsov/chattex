@@ -8,12 +8,14 @@ export const PasswordContainer = styled.div`
     position: relative;
 
     input {
-        border: ${pallete.inputBorder};
+        border: ${({ error }) => error === 'true' ? pallete.inputErrorBorder : pallete.inputBorder};
+        color: ${({ error }) => error === 'true' ? pallete.errorColor : pallete.inputColor};
         width: inherit;
 
         &:focus, &:active {
             border: none;
             border: ${pallete.inputOutline};
+            color: ${pallete.inputColor};
         }
     }
 `

@@ -13,9 +13,9 @@ export const InputContainer = styled.div`
 
     input {
         position: relative;
-        border: ${pallete.inputBorder};
+        border: ${({ error }) => error === 'true' ? pallete.inputErrorBorder : pallete.inputBorder};
         background-color: ${pallete.inputBackgroundColor};
-        color: ${pallete.inputColor};
+        color: ${({ error }) => error === 'true' ? pallete.errorColor : pallete.inputColor};
         padding: 16px 22px;
         font-size: 1rem;
         transition: all 200ms ease;
@@ -23,6 +23,7 @@ export const InputContainer = styled.div`
         &:focus, &:active {
             outline: none;
             border: ${pallete.inputOutline};
+            color: ${pallete.inputColor};
         }
 
         &::placeholder {
