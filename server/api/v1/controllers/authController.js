@@ -13,11 +13,14 @@ export const login = asyncHandler(async (request, response) => {
     const existingUser = await User.findOne({ email })
 
     if (existingUser && (await existingUser.matchPasswords(password))) {
-        generateAuthToken(response, existingUser._id, rememberMe)
+        const { _id, username, email } = existingUser
+
+        generateAuthToken(response, _id, rememberMe)
 
         response.status(200).json({
             'status': 'OK',
-            'message': `Successfully logged in as ${existingUser.username}`
+            'message': `Successfully logged in as ${username}`,
+            'data': { _id, username, email }
         })
     } else {
         response.status(400)

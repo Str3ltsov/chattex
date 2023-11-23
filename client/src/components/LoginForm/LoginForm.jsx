@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import {
     FormContainer,
     FormCheckboxAndLinkContainer,
@@ -9,7 +11,8 @@ import InputField from '../../components/InputField/InputField.jsx'
 import PasswordField from '../../components/PasswordField/PasswordField.jsx'
 import ButtonLoader from '../../components/ButtonLoader/ButtonLoader.jsx'
 import ButtonCheckMark from '../../components/ButtonCheckMark/ButtonCheckMark.jsx'
-import useLoginMutation from "../../hooks/useLoginMutation.js"
+import { useLoginMutation } from '../../redux/slices/authApiSlice.js'
+import { setUserInfo } from '../../redux/slices/authSlice.js'
 
 /* Form for login authentication */
 const LoginForm = () => {
@@ -17,16 +20,26 @@ const LoginForm = () => {
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState(false)
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const getEmail = emailValue => setEmail(emailValue)
     const getPassword = passwordValue => setPassword(passwordValue)
-
     const handleRememberMe = () => setRememberMe(prev => !prev)
 
-    const { mutate, isLoading, isError, isSuccess } = useLoginMutation()
+    const [login, { isLoading, isError, isSuccess }] = useLoginMutation()
 
-    const submitForm = event => {
+    const submitForm = async event => {
         event.preventDefault()
-        mutate({ email, password, rememberMe })
+
+        try {
+            const { status, message, data } = await login({ email, password, rememberMe }).unwrap()
+
+            dispatch(setUserInfo({ ...data }))
+        }
+        catch ({ data }) {
+            console.error(data)
+        }
     }
 
     return (
