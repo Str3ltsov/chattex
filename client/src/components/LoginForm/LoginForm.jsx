@@ -23,11 +23,11 @@ const LoginForm = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const [login, { isLoading, isError, isSuccess }] = useLoginMutation()
+
     const getEmail = emailValue => setEmail(emailValue)
     const getPassword = passwordValue => setPassword(passwordValue)
     const handleRememberMe = () => setRememberMe(prev => !prev)
-
-    const [login, { isLoading, isError, isSuccess }] = useLoginMutation()
 
     const submitForm = async event => {
         event.preventDefault()

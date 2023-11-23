@@ -1,13 +1,24 @@
 import jwt from "jsonwebtoken"
 import nodemailer from 'nodemailer'
 
-export const generateAuthToken = (response, userId, rememberMe = false) => {
+export const setExpiresInDays = (rememberMe = false) => {
     let expiresInDays = 1
 
     if (rememberMe) {
         expiresInDays = 30
     }
 
+    return expiresInDays
+}
+
+export const setExpirationTimestamp = expiresInDays => {
+    const currentDate = new Date()
+    currentDate.setDate(currentDate.getDate() + expiresInDays)
+
+    return Math.floor(currentDate.getTime() / 1000)
+}
+
+export const generateAuthToken = (response, userId, expiresInDays) => {
     const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: `${expiresInDays}d` })
 
     response.cookie('jwt', token, {

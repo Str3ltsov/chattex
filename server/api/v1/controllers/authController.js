@@ -1,6 +1,8 @@
 import asyncHandler from "../middlewares/asyncHandler.js"
 import User from "../models/userModel.js"
 import {
+    setExpiresInDays,
+    setExpirationTimestamp,
     generateAuthToken,
     generateResetPasswordToken,
     sendEmail,
@@ -15,12 +17,15 @@ export const login = asyncHandler(async (request, response) => {
     if (existingUser && (await existingUser.matchPasswords(password))) {
         const { _id, username, email } = existingUser
 
-        generateAuthToken(response, _id, rememberMe)
+        const expiresInDays = setExpiresInDays(rememberMe)
+        const expirationTimestamp = setExpirationTimestamp(expiresInDays)
+
+        generateAuthToken(response, _id, expiresInDays)
 
         response.status(200).json({
             'status': 'OK',
             'message': `Successfully logged in as ${username}`,
-            'data': { _id, username, email }
+            'data': { _id, username, email, expirationTimestamp }
         })
     } else {
         response.status(400)
