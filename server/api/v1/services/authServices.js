@@ -15,7 +15,7 @@ export const setExpirationTimestamp = expiresInDays => {
     const currentDate = new Date()
     currentDate.setDate(currentDate.getDate() + expiresInDays)
 
-    return Math.floor(currentDate.getTime() / 1000)
+    return currentDate.getTime()
 }
 
 export const generateAuthToken = (response, userId, expiresInDays) => {

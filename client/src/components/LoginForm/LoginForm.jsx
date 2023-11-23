@@ -13,6 +13,7 @@ import ButtonLoader from '../../components/ButtonLoader/ButtonLoader.jsx'
 import ButtonCheckMark from '../../components/ButtonCheckMark/ButtonCheckMark.jsx'
 import { useLoginMutation } from '../../redux/slices/authApiSlice.js'
 import { setUserInfo } from '../../redux/slices/authSlice.js'
+// import useGuest from "../../hooks/useGuest.js"
 
 /* Form for login authentication */
 const LoginForm = () => {
@@ -24,6 +25,8 @@ const LoginForm = () => {
     const dispatch = useDispatch()
 
     const [login, { isLoading, isError, isSuccess }] = useLoginMutation()
+
+    // useGuest()
 
     const getEmail = emailValue => setEmail(emailValue)
     const getPassword = passwordValue => setPassword(passwordValue)
