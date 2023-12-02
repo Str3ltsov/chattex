@@ -1,6 +1,8 @@
 import asyncHandler from "../middlewares/asyncHandler.js"
 import User from "../models/userModel.js"
 import {
+    setExpiresInDays,
+    setExpirationTimestamp,
     generateAuthToken,
     generateResetPasswordToken,
     sendEmail,
@@ -13,11 +15,17 @@ export const login = asyncHandler(async (request, response) => {
     const existingUser = await User.findOne({ email })
 
     if (existingUser && (await existingUser.matchPasswords(password))) {
-        generateAuthToken(response, existingUser._id, rememberMe)
+        const { _id, username, email } = existingUser
+
+        const expiresInDays = setExpiresInDays(rememberMe)
+        const expirationTimestamp = setExpirationTimestamp(expiresInDays)
+
+        generateAuthToken(response, _id, expiresInDays)
 
         response.status(200).json({
             'status': 'OK',
-            'message': `Successfully logged in as ${existingUser.username}`
+            'message': `Successfully logged in as ${username}`,
+            'data': { _id, username, email, expirationTimestamp }
         })
     } else {
         response.status(400)
@@ -67,7 +75,7 @@ export const forgotPassword = asyncHandler(async (request, response) => {
 
     const subject = 'Reset password'
     const message = `Link is only valid for ${expiresInMinutes} minutes.<br><br>
-                     Reset password link: http://localhost:3000/resetpassword/${token}<br>`
+                     Reset password link: http://${process.env.CLIENT_APP_URL}:${process.env.CLIENT_APP_PORT}/reset-password/${token}<br>`
 
     sendEmail(email, subject, message)
 
