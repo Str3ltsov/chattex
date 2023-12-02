@@ -34,11 +34,12 @@ const LoginForm = () => {
 
     const submitForm = async event => {
         event.preventDefault()
-
         try {
-            const { status, message, data } = await login({ email, password, rememberMe }).unwrap()
+            const { status, message, data } =
+                await login({ email, password, rememberMe }).unwrap()
 
             dispatch(setUserInfo({ ...data }))
+            console.info(status, message)
         }
         catch ({ data }) {
             console.error(data)
