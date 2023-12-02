@@ -11,8 +11,6 @@ const ForgotPasswordForm = () => {
 
     const [forgotPassword, { isLoading, isError, isSuccess }] = useForgotPasswordMutation()
 
-    // useGuest()
-
     const getEmail = emailValue => setEmail(emailValue)
 
     const submitForm = async event => {

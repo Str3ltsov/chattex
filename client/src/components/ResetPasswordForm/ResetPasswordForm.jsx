@@ -15,8 +15,6 @@ const ResetPasswordForm = () => {
 
     const [resetPassword, { isLoading, isError, isSuccess }] = useResetPasswordMutation()
 
-    // useGuest()
-
     const getResetPasswordToken = () => {
         const pathname = window.location.pathname
         const names = pathname.split('/')

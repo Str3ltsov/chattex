@@ -6,7 +6,6 @@ import { FormButton, FormButtonIcon, FormContainer } from "./RegisterForm.styled
 import ButtonLoader from "../ButtonLoader/ButtonLoader.jsx"
 import ButtonCheckMark from "../ButtonCheckMark/ButtonCheckMark.jsx"
 import { useRegisterMutation } from "../../redux/slices/authApiSlice.js"
-// import useGuest from "../../hooks/useGuest.js"
 
 /* Form for register authentication */
 const RegisterForm = () => {
@@ -18,8 +17,6 @@ const RegisterForm = () => {
     const navigate = useNavigate()
 
     const [register, { isLoading, isError, isSuccess }] = useRegisterMutation()
-
-    // useGuest()
 
     const getUsername = usernameValue => setUsername(usernameValue)
     const getEmail = emailValue => setEmail(emailValue)
