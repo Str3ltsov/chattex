@@ -31,7 +31,7 @@ const ForgotPasswordForm = () => {
         <FormContainer>
             <InputField getValue={getEmail} error={isError.toString()} label={"Email*"}
                 type={"email"} name={"email"} id={"email"} placeholder={"johnjohnson@gmail.com"} />
-            <FormButton type="button" onClick={submitForm}>
+            <FormButton type="button" onClick={submitForm} disabled={isLoading || isSuccess}>
                 {isLoading && <ButtonLoader />}
                 {isSuccess && <ButtonCheckMark />}
                 {

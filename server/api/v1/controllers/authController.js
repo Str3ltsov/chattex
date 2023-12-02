@@ -75,7 +75,7 @@ export const forgotPassword = asyncHandler(async (request, response) => {
 
     const subject = 'Reset password'
     const message = `Link is only valid for ${expiresInMinutes} minutes.<br><br>
-                     Reset password link: http://localhost:3000/resetpassword/${token}<br>`
+                     Reset password link: http://localhost:3000/reset-password/${token}<br>`
 
     sendEmail(email, subject, message)
 

@@ -2,7 +2,8 @@ import { apiSlice } from "./apiSlice.js"
 import {
     AUTH_LOGIN_URL,
     AUTH_REGISTER_URL,
-    AUTH_FORGOT_PASSWORD_URL
+    AUTH_FORGOT_PASSWORD_URL,
+    AUTH_RESET_PASSWORD_URL
 } from '../../helpers/Constants.js'
 
 export const authApiSlice = apiSlice.injectEndpoints({
@@ -27,6 +28,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: data
             })
+        }),
+        resetPassword: builder.mutation({
+            query: ({ resetPasswordToken, password, confirmPassword }) => ({
+                url: `${AUTH_RESET_PASSWORD_URL}/${resetPasswordToken}`,
+                method: 'PATCH',
+                body: { password, confirmPassword }
+            })
         })
     })
 })
@@ -34,5 +42,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 export const {
     useLoginMutation,
     useRegisterMutation,
-    useForgotPasswordMutation
+    useForgotPasswordMutation,
+    useResetPasswordMutation
 } = authApiSlice
