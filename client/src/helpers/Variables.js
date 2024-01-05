@@ -33,3 +33,9 @@ export const logoColor = '#5965D6'
 
 // Sizes
 export const phoneSize = '520px'
+
+// Session message
+export const sessionMessageShadowColor = '#40499C'
+export const sessionMessageShadowColorMobile = '#DDDDDD'
+export const sessionMessageLoaderSuccessBackgroundColor = 'rgba(67, 160, 72, 0.15)'
+export const sessionMessageLoaderErrorBackgroundColor = 'rgba(221, 51, 51, 0.15)'
